@@ -28,19 +28,15 @@ ENABLE_SCHEDBOOST := true
 
 # Kernel
 BOARD_NAME := Qualcomm
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 
-BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1
-BOARD_KERNEL_CMDLINE += service_locator.enable=1 swiotlb=1 androidboot.configfs=true androidboot.usbcontroller=a800000.dwc3 
-BOARD_KERNEL_CMDLINE += androidboot.configfs=true
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-BOARD_KERNEL_BASE    := 0x00000000
-BOARD_KERNEL_OFFSET  := 0x00008000
+BOARD_NAME := Qualcomm
+BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200,n8 androidboot.console=ttyMSM0 earlycon=msm_serial_dm,0xc170000 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 service_locator.enable=1 swiotlb=1 androidboot.configfs=true androidboot.usbcontroller=a800000.dwc3 androidboot.hab.csv=0 androidboot.hab.product=chef androidboot.hab.cid=50 buildvariant=user
+BOARD_KERNEL_BASE        := 0x00000000
+BOARD_KERNEL_OFFSET := 0x00008000
 BOARD_KERNEL_PAGESIZE    := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET     := 0x01000000
 BOARD_MKBOOTIMG_ARGS := --board $(BOARD_NAME) --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/Image.gz-dtb
-
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000
 #BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x04000000
@@ -71,14 +67,14 @@ TW_NO_SCREEN_BLANK := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-#TW_INCLUDE_NTFS_3G := true
+TW_INCLUDE_NTFS_3G := true
 TWRP_INCLUDE_LOGCAT := true
 RECOVERY_SDCARD_ON_DATA := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
 #TW_RECOVERY_ADDITIONAL_RELINK_FILES := ${OUT_DIR}/system/lib64/android.hardware.boot@1.0.so
-#TW_SCREEN_BLANK_ON_BOOT := true
+TW_SCREEN_BLANK_ON_BOOT := true
 
 # MTP will not work until we update it to support ffs
 TW_EXCLUDE_MTP := true
@@ -100,8 +96,8 @@ USE_RECOVERY_INSTALLER := true
 RECOVERY_INSTALLER_PATH := $(LOCAL_PATH)/treble
 
 # Crypto
-#TARGET_HW_DISK_ENCRYPTION := true
-TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
+TARGET_HW_DISK_ENCRYPTION := true
+#TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
 TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 #TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_FBE := true
